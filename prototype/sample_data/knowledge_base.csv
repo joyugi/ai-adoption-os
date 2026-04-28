@@ -1,0 +1,6 @@
+category,question,answer,source,risk_level
+Sales Enablement,Where can I find the latest pricing guidance?,"The latest pricing guidance is available in the internal GTM pricing playbook. Employees should verify final pricing with Sales Operations before sharing externally.",GTM Pricing Playbook,Medium
+HR Policy,What is the remote work policy?,"Employees may work remotely according to their team norms and manager approval. Policy-sensitive exceptions should be escalated to HR.",Employee Handbook,Medium
+Operations,How do I request vendor approval?,"Submit a vendor intake form, include business justification, budget owner approval, and security review if customer or employee data is involved.",Vendor Management SOP,High
+Customer Support,Can I promise a custom feature timeline to a customer?,"No. Feature timelines should not be promised without Product and Engineering confirmation. Escalate to the account owner and product lead.",Customer Commitment Policy,High
+IT Security,Can I upload customer data into an AI tool?,"Do not upload customer, employee, or confidential company data into unapproved AI tools. Use only approved systems and escalate unclear cases to Security.",AI Usage Policy,High
