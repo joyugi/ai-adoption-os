@@ -1,40 +1,12 @@
 # AI Adoption OS: From Pilot to Production
 
-A product-led framework and working prototype for turning enterprise AI pilots into trusted, measurable production systems.
+AI Adoption OS is a product-led framework and working prototype focused on the operational layer required to move enterprise AI from experimentation to trusted production usage.
 
-## What This Demonstrates
+The project explores how workflow design, human oversight, governance controls, escalation logic, and adoption telemetry influence whether AI systems become trusted operational capabilities.
 
-- Product strategy for enterprise AI
-- Human-centered workflow design
-- Governance and risk controls
-- Adoption telemetry and KPIs
-- Pilot-to-production execution
+## Why This Exists
 
-## Screenshots
-
-### Prototype Interface
-![Prototype Home](assets/screenshots/prototype-home.png)
-
-### Telemetry Dashboard
-![Telemetry Dashboard](assets/screenshots/adoption-telemetry.png)
-
-## Included Assets
-
-### Product Assets
-- Working product demo
-- Knowledge base
-- Scorecard
-
-### Operating Assets
-- Governance model
-- Rollout plan
-- RACI
-- Risk register
-
-### Measurement Assets
-- Telemetry logging
-- Metrics framework
-- Feedback taxonomy
+Most AI pilots fail to become trusted, repeatable operating capabilities because organizations focus on the model before solving workflow fit, human oversight, governance, and adoption measurement.
 
 ## Why This Matters
 
@@ -47,9 +19,44 @@ Many AI initiatives fail not because the model is weak, but because:
 - adoption is not measured  
 - governance is weak
 
+## Problem
+
+Organizations often struggle to move AI from experimentation to production because ownership, decision rights, escalation paths, and success metrics are unclear.
+
+## Product Approach
+
+The prototype currently includes a Streamlit interface, CSV-backed knowledge retrieval, response matching, feedback capture, telemetry logging, and escalation workflows designed to simulate enterprise AI operating patterns and operational oversight.
+
+## Design Principles
+
+- Human oversight over full automation
+- Governance integrated into workflows
+- Adoption measured behaviorally, not only technically
+- Escalation pathways for high-risk decisions
+- Operational trust as a core product requirement
+
+## What This Demonstrates
+
+- Enterprise AI product strategy
+- Human-in-the-loop workflow design
+- Governance and escalation modeling
+- Adoption telemetry and operational KPIs
+- Pilot-to-production systems thinking
+- AI operating model design
+
+## Screenshots
+
+### Prototype Interface
+
+![Prototype Home](assets/screenshots/prototype-home.png)
+
+### Telemetry Dashboard
+
+![Telemetry Dashboard](assets/screenshots/adoption-telemetry.png)
+
 ## Use Case
 
-A mid-size enterprise deploys an internal AI assistant for GTM, HR, Operations, and Support teams while maintaining trust, compliance, and escalation controls.
+A mid-size enterprise deploys an internal AI assistant across GTM, HR, Operations, and Support workflows while maintaining trust, compliance, escalation handling, and operational oversight.
 
 The core product question:
 
@@ -71,33 +78,108 @@ The working product demo allows a user to:
 6. Log helpfulness, time saved, and rejection reason
 7. View adoption telemetry
 
-## Metrics
+## Architecture
 
-The project focuses on product and adoption metrics, not only model metrics.
+The prototype follows a simplified enterprise AI operating architecture designed to simulate how organizations operationalize AI-supported workflows with oversight and telemetry.
 
-### Executive KPIs
-- ROI per active user
-- Cost per resolved query
+### System Architecture
 
-### Adoption Metrics
-- Weekly active users
-- Repeat usage rate
-- Percentage of eligible tasks using AI
+![AI Adoption OS Architecture](assets/architecture/ai-adoption-os-architecture.png)
 
-### Trust Metrics
-- Acceptance rate
-- Rejection rate
-- Escalation rate
-
-### Governance Metrics
-- High-risk queries flagged
-- Source coverage gaps
+This architecture emphasizes retrieval-based guidance, escalation handling, human oversight, telemetry logging, and operational adoption measurement.
 
 ## Product Flow
 
 ```text
 User Question → Retrieval Logic → Approved Source → Response → Feedback Capture → Telemetry → Insights
 ```
+
+## Core Workflows
+
+The project models enterprise AI workflows including policy Q&A, escalation handling, vendor approval support, human review for high-risk responses, and feedback capture for continuous operational improvement.
+
+## Governance Model
+
+The governance model clarifies human oversight, decision ownership, escalation rules, and accountability for AI-supported workflows. 
+
+## Adoption Telemetry
+
+The prototype tracks usage, feedback, unresolved questions, and escalation signals to show whether AI is being adopted safely and usefully.
+
+## Evaluation Framework
+
+Future iterations will evaluate answer relevance, source accuracy, escalation quality, user trust, and workflow completion.
+
+## Metrics
+
+The project focuses on product and adoption metrics, not only model metrics. The emphasis is on operational adoption, trust calibration, workflow integration, and measurable organizational usage.
+
+### Executive KPIs
+
+- ROI per active user
+- Cost per resolved query
+
+### Adoption Metrics
+
+- Weekly active users
+- Repeat usage rate
+- Percentage of eligible tasks using AI
+
+### Trust Metrics
+
+- Acceptance rate
+- Rejection rate
+- Escalation rate
+
+### Governance Metrics
+
+- High-risk queries flagged
+- Source coverage gaps
+
+## Included Assets
+
+### Product Assets
+
+- Working product demo
+- Knowledge base
+- Scorecard
+
+### Operating Assets
+
+- Governance model
+- Rollout plan
+- RACI
+- Risk register
+
+### Measurement Assets
+
+- Telemetry logging
+- Metrics framework
+- Feedback taxonomy
+
+## Roadmap
+
+The roadmap includes stronger retrieval, role-based access, evaluation tests, improved telemetry, workflow orchestration, and production-readiness controls.
+
+## Production Considerations
+
+Future production-oriented iterations would include:
+
+- Role-based access controls
+- Vector-based retrieval
+- Audit logging
+- Prompt injection mitigation
+- Security and privacy controls
+- Evaluation pipelines
+- Workflow orchestration
+- Cost and latency monitoring
+- Human approval checkpoints
+
+These considerations are critical for moving AI systems from experimentation into sustainable organizational infrastructure.
+
+## What I Would Build Next
+
+Next iterations would include vector-based retrieval, source attribution, role-based permissions, richer operational dashboards, evaluation pipelines, and more advanced workflow orchestration.
 
 ## How to Run the Prototype
 
@@ -111,9 +193,8 @@ streamlit run prototype/app.py
 ## Artifacts
 
 - `scorecard/ai-adoption-readiness-scorecard.xlsx`  
-  AI Adoption Readiness Scorecard used to evaluate whether enterprise AI use cases should scale, pause, or redesign.
+AI Adoption Readiness Scorecard used to evaluate whether enterprise AI use cases should scale, pause, or redesign.
 
 ## Closing Perspective
 
 AI advantage rarely comes from the model alone. It comes from workflows people trust, use, and sustain.
-
