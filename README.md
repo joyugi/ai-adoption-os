@@ -56,6 +56,8 @@ When no API key is configured, the prototype runs in a retrieval-only fallback m
 
 ![Telemetry Dashboard](assets/screenshots/adoption-telemetry.png)
 
+*Sample telemetry from demo usage*
+
 ## Use Case
 
 A mid-size enterprise deploys an internal AI assistant across GTM, HR, Operations, and Support workflows while maintaining trust, compliance, escalation handling, and operational oversight.
