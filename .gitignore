@@ -38,6 +38,9 @@ htmlcov/
 # Streamlit
 .streamlit/secrets.toml
 
+# Local telemetry database
+prototype/telemetry.db
+
 # Cursor
 .cursorignore
 .cursorindexingignore

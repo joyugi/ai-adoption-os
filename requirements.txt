@@ -1,6 +1,6 @@
 streamlit
 pandas
-openai
+anthropic
+scikit-learn
 python-dotenv
 plotly
-pydantic
