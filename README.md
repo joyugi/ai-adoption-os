@@ -25,7 +25,9 @@ Organizations often struggle to move AI from experimentation to production becau
 
 ## Product Approach
 
-The prototype currently includes a Streamlit interface, CSV-backed knowledge retrieval, response matching, feedback capture, telemetry logging, and escalation workflows designed to simulate enterprise AI operating patterns and operational oversight.
+The prototype includes a Streamlit interface, TF-IDF retrieval over an approved knowledge base, Claude-generated grounded answers with source citations, persistent SQLite telemetry, feedback capture, and escalation workflows designed to simulate enterprise AI operating patterns and operational oversight.
+
+When no API key is configured, the prototype runs in a retrieval-only fallback mode that displays the best-matching approved knowledge base entry directly, so the demo remains fully runnable.
 
 ## Design Principles
 
@@ -86,13 +88,23 @@ The prototype follows a simplified enterprise AI operating architecture designed
 
 ![AI Adoption OS Architecture](assets/architecture/ai-adoption-os-architecture.png)
 
-This architecture emphasizes retrieval-based guidance, escalation handling, human oversight, telemetry logging, and operational adoption measurement.
+This architecture emphasizes retrieval-based guidance, LLM answer generation grounded in approved sources, escalation handling, human oversight, persistent telemetry logging, and operational adoption measurement.
 
 ## Product Flow
 
 ```text
-User Question → Retrieval Logic → Approved Source → Response → Feedback Capture → Telemetry → Insights
+User Question → TF-IDF Retrieval (scored) → Top Approved Sources
+             → Claude Generation (grounded, cited)  [or retrieval-only fallback]
+             → Response with Confidence + Risk Labels
+             → Feedback Capture → SQLite Telemetry → Insights
 ```
+
+Key behaviors:
+
+- **Confidence** is derived from retrieval similarity scores — separate from **Risk**, which is knowledge base metadata
+- Questions below the confidence threshold are treated as source coverage gaps and routed to escalation
+- Claude answers only from the approved sources provided, cites the source, and recommends escalation when sources do not cover the question
+- All adoption events persist in SQLite across sessions, so telemetry reflects real cumulative usage
 
 ## Core Workflows
 
@@ -186,9 +198,18 @@ Next iterations would include vector-based retrieval, source attribution, role-b
 ```bash
 python3 -m venv .venv
 source .venv/bin/activate
-pip install -r prototype/requirements.txt
+pip install -r requirements.txt
 streamlit run prototype/app.py
 ```
+
+To enable AI-generated answers, copy `.env.example` to `.env` and add your Anthropic API key:
+
+```bash
+cp .env.example .env
+# then edit .env and set ANTHROPIC_API_KEY
+```
+
+Without a key, the prototype runs in retrieval-only fallback mode.
 
 ## Artifacts
 
