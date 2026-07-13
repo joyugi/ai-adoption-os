@@ -11,53 +11,46 @@ V4: Add admin governance controls
 
 ---
 
-## Current Version (V1)
+## Current Version (V2) — Shipped
 
-### Working Prototype
+### Real Retrieval + LLM Pipeline
 
-- Internal knowledge assistant prototype built in Streamlit
-- Sample policy/process knowledge base
-- Basic question matching and responses
-- Interaction event logging
-- Readiness scorecard for AI adoption use cases
-- Supporting case studies and operating documents
+- TF-IDF retrieval with similarity-based confidence scoring
+- Claude-generated answers grounded in approved sources, with citations
+- Retrieval-only fallback mode when no API key is configured
+- Persistent SQLite adoption telemetry with dashboard charts
+- Coverage-gap detection and escalation for unanswered questions
+- Expanded knowledge base (32 entries, 9 categories, 3 risk levels)
 
 ### Goal
 
-Demonstrate a practical operating model for enterprise AI adoption.
+Make the product real: trusted answers, honest metrics.
 
 ---
 
-## Next Release (V2)
+## V3 — Candidate Directions (Under Evaluation)
 
-### Improve Product Experience
+Four directions are being weighed, each with distinct tradeoffs:
 
-- Better search and answer relevance
-- Confidence scoring on responses
-- Source citation display
-- Feedback buttons (Helpful / Not Helpful)
-- Improved UI polish and navigation
+### 1. Semantic Retrieval
 
-### Goal
+Replace TF-IDF with vector embeddings so retrieval matches meaning rather than keywords (e.g., "can I WFH?" should match the remote work policy). Fixes the known synonym limitation of keyword retrieval.
 
-Increase trust and usability.
+### 2. Evaluation Pipeline
 
----
+A golden-question test suite scoring retrieval hit rate, answer groundedness, refusal correctness for out-of-scope questions, and escalation quality — run on every change. Makes system quality measurable and regression-safe.
 
-## V3
+### 3. Adoption Intelligence Layer
 
-### Adoption Intelligence Layer
+Deeper analytics on the existing telemetry: usage trends over time, repeat-usage rate, weekly active users, time-saved rollups, and LLM-vs-fallback answer breakdowns.
 
-- Usage analytics dashboard
-- Repeat usage tracking
-- Top unanswered questions
-- Department usage trends
-- Time saved estimates
-- User satisfaction trends
+### 4. Governance Controls
 
-### Goal
+Role-based views, sensitive-query detection, a content-owner review queue for escalated questions, and audit logging.
 
-Make adoption measurable.
+### Leading Candidate
+
+Options 1 + 2 together: the evaluation suite provides before/after evidence that semantic retrieval outperforms keyword retrieval, turning an infrastructure change into a measurable product improvement.
 
 ---
 
