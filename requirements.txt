@@ -4,3 +4,4 @@ anthropic
 scikit-learn
 python-dotenv
 plotly
+model2vec

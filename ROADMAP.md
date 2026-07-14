@@ -5,13 +5,31 @@
 Help organizations move AI initiatives from pilot to production through trusted workflows, measurable adoption, and practical governance.
 
 V1: Working prototype
-V2: Add user feedback capture
-V3: Add adoption telemetry dashboard
-V4: Add admin governance controls
+V2: Real retrieval + LLM pipeline with persistent telemetry
+V3: Semantic retrieval + evaluation pipeline
+V4: Adoption intelligence and governance controls
 
 ---
 
-## Current Version (V2) — Shipped
+## Current Version (V3) — Shipped
+
+### Semantic Retrieval + Evaluation Pipeline
+
+- Semantic retrieval via local model2vec embeddings — matches meaning, not keywords ("can I WFH?" now finds the remote work policy; TF-IDF scored it 0.0)
+- Acronym normalization layer for workplace shorthand (WFH, PTO, NDA, …)
+- Golden-set evaluation suite (40 cases) scoring hit rate, refusal correctness, confidence calibration, and MRR — TF-IDF vs semantic compared side by side
+- Threshold tuning driven by the eval harness, with a documented recall-first trade-off (Claude's grounding prompt is the second gate for out-of-scope questions)
+- Claude-as-judge scoring of answer groundedness and citation quality
+- Committed, reproducible eval report: hit@1 84% → 100%, keyword-mismatch hit@1 60% → 100%, false refusals 19% → 0%
+- TF-IDF retriever retained for eval comparison
+
+### Goal
+
+Prove the product works: measurable retrieval quality, regression-safe changes.
+
+---
+
+## V2 — Shipped
 
 ### Real Retrieval + LLM Pipeline
 
@@ -28,45 +46,23 @@ Make the product real: trusted answers, honest metrics.
 
 ---
 
-## V3 — Candidate Directions (Under Evaluation)
+## V4 — Candidate Directions
 
-Four directions are being weighed, each with distinct tradeoffs:
-
-### 1. Semantic Retrieval
-
-Replace TF-IDF with vector embeddings so retrieval matches meaning rather than keywords (e.g., "can I WFH?" should match the remote work policy). Fixes the known synonym limitation of keyword retrieval.
-
-### 2. Evaluation Pipeline
-
-A golden-question test suite scoring retrieval hit rate, answer groundedness, refusal correctness for out-of-scope questions, and escalation quality — run on every change. Makes system quality measurable and regression-safe.
-
-### 3. Adoption Intelligence Layer
+### 1. Adoption Intelligence Layer
 
 Deeper analytics on the existing telemetry: usage trends over time, repeat-usage rate, weekly active users, time-saved rollups, and LLM-vs-fallback answer breakdowns.
 
-### 4. Governance Controls
-
-Role-based views, sensitive-query detection, a content-owner review queue for escalated questions, and audit logging.
-
-### Leading Candidate
-
-Options 1 + 2 together: the evaluation suite provides before/after evidence that semantic retrieval outperforms keyword retrieval, turning an infrastructure change into a measurable product improvement.
-
----
-
-## V4
-
-### Governance Controls
+### 2. Governance Controls
 
 - Role-based access controls
 - Sensitive query detection
 - Escalation workflow for policy-sensitive questions
-- Content approval workflow
+- Content-owner review queue and approval workflow
 - Audit logs
 
 ### Goal
 
-Enable safe enterprise deployment.
+Enable safe enterprise deployment with visible adoption evidence.
 
 ---
 
