@@ -1,0 +1,41 @@
+id,case_type,query,expected_question,expected_category,expected_risk,notes
+V1,verbatim,Where can I find the latest pricing guidance?,Where can I find the latest pricing guidance?,Sales Enablement,Medium,
+V2,verbatim,What is the remote work policy?,What is the remote work policy?,HR Policy,Medium,
+V3,verbatim,How do I request vendor approval?,How do I request vendor approval?,Operations,High,
+V4,verbatim,How do I issue a refund to a customer?,How do I issue a refund to a customer?,Customer Support,Medium,
+V5,verbatim,What are the password requirements?,What are the password requirements?,IT Security,Low,
+V6,verbatim,How do I submit an expense report?,How do I submit an expense report?,Finance,Low,
+V7,verbatim,What is the data retention policy?,What is the data retention policy?,Legal & Compliance,Medium,
+V8,verbatim,When do my benefits start?,When do my benefits start?,Onboarding,Low,
+V9,verbatim,How do I set up VPN access?,How do I set up VPN access?,IT,Low,
+P1,paraphrase,Am I allowed to give a customer a discount?,Can I offer a discount to close a deal?,Sales Enablement,Medium,
+P2,paraphrase,Is it okay to show our roadmap to a potential customer?,Can I share our product roadmap with a prospect?,Sales Enablement,High,
+P3,paraphrase,How much paid time off can I take each year?,How much paid time off do I get per year?,HR Policy,Low,
+P4,paraphrase,When does the company do performance reviews?,When are performance reviews held?,HR Policy,Low,
+P5,paraphrase,How do I book travel for a business trip?,What is the process for booking business travel?,Operations,Low,
+P6,paraphrase,How do I book a meeting room?,How do I reserve a conference room?,Operations,Low,
+P7,paraphrase,What's our response time commitment for support tickets?,What is the SLA for responding to support tickets?,Customer Support,Low,
+P8,paraphrase,A customer reported an outage — how do I escalate it?,How do I escalate an outage reported by a customer?,Customer Support,High,
+P9,paraphrase,Is it allowed to put customer data into an AI tool?,Can I upload customer data into an AI tool?,IT Security,High,
+P10,paraphrase,What are the rules for the company credit card?,What is the corporate card policy?,Finance,Medium,
+P11,paraphrase,Who has authority to sign contracts for the company?,Can I sign a contract on behalf of the company?,Legal & Compliance,High,
+P12,paraphrase,How do new hires get access to internal tools?,How do I get access to internal systems as a new hire?,Onboarding,Low,
+P13,paraphrase,How can I get a new work laptop?,How do I request a new laptop or hardware?,IT,Low,
+K1,keyword_mismatch,Can I WFH?,What is the remote work policy?,HR Policy,Medium,acronym + zero lexical overlap — the v2 motivating failure
+K2,keyword_mismatch,How long is maternity leave?,What is the parental leave policy?,HR Policy,Medium,synonym: maternity vs parental
+K3,keyword_mismatch,"I clicked a sketchy link in an email, what now?",What should I do if I clicked a phishing link?,IT Security,High,colloquial phrasing of phishing
+K4,keyword_mismatch,Can I paste client info into ChatGPT?,Can I upload customer data into an AI tool?,IT Security,High,brand name + client/customer synonym
+K5,keyword_mismatch,How much PTO do I get?,How much paid time off do I get per year?,HR Policy,Low,acronym expansion test
+K6,keyword_mismatch,"Someone is bullying me at work, who do I talk to?",How do I report a workplace concern or harassment?,HR Policy,High,bullying vs harassment
+K7,keyword_mismatch,My customer wants their money back,How do I issue a refund to a customer?,Customer Support,Medium,money back vs refund
+K8,keyword_mismatch,Do I need a signed confidentiality agreement before telling a partner secrets?,Do I need an NDA before sharing confidential information?,Legal & Compliance,High,reverse acronym: query spells out NDA
+K9,keyword_mismatch,Who signs off on spending above the limit?,What is the purchasing approval threshold?,Operations,Medium,spending vs purchasing
+K10,keyword_mismatch,Where are success stories I can send to a buyer?,Where do I find approved customer case studies?,Sales Enablement,Low,success stories vs case studies
+O1,off_kb,best pizza near the office,,,,v2 threshold-tuning adversarial case
+O2,off_kb,What is the meaning of life?,,,,fully unrelated
+O3,off_kb,What's the wifi password for the office guest network?,,,,shares password/office vocabulary with KB
+O4,off_kb,Can I bring my dog to work?,,,,workplace-policy adjacent but uncovered
+O5,off_kb,How do I file my personal taxes?,,,,finance-adjacent but personal
+O6,off_kb,What is the company stock price target?,,,,finance vocabulary without coverage
+O7,off_kb,How do I reset my Netflix password?,,,,shares password vocabulary
+O8,off_kb,What is the dress code?,,,,HR-policy adjacent but uncovered

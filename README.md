@@ -25,7 +25,7 @@ Organizations often struggle to move AI from experimentation to production becau
 
 ## Product Approach
 
-The prototype includes a Streamlit interface, TF-IDF retrieval over an approved knowledge base, Claude-generated grounded answers with source citations, persistent SQLite telemetry, feedback capture, and escalation workflows designed to simulate enterprise AI operating patterns and operational oversight.
+The prototype includes a Streamlit interface, semantic retrieval (local model2vec embeddings) over an approved knowledge base, Claude-generated grounded answers with source citations, persistent SQLite telemetry, feedback capture, escalation workflows, and a golden-set evaluation pipeline that measures retrieval and answer quality on every change.
 
 When no API key is configured, the prototype runs in a retrieval-only fallback mode that displays the best-matching approved knowledge base entry directly, so the demo remains fully runnable.
 
@@ -95,7 +95,7 @@ This architecture emphasizes retrieval-based guidance, LLM answer generation gro
 ## Product Flow
 
 ```text
-User Question → TF-IDF Retrieval (scored) → Top Approved Sources
+User Question → Acronym Normalization → Semantic Retrieval (scored) → Top Approved Sources
              → Claude Generation (grounded, cited)  [or retrieval-only fallback]
              → Response with Confidence + Risk Labels
              → Feedback Capture → SQLite Telemetry → Insights
@@ -104,8 +104,9 @@ User Question → TF-IDF Retrieval (scored) → Top Approved Sources
 Key behaviors:
 
 - **Confidence** is derived from retrieval similarity scores — separate from **Risk**, which is knowledge base metadata
+- Retrieval matches meaning, not keywords: "Can I WFH?" finds the remote work policy despite sharing no words with it (a known failure of the previous TF-IDF retriever)
 - Questions below the confidence threshold are treated as source coverage gaps and routed to escalation
-- Claude answers only from the approved sources provided, cites the source, and recommends escalation when sources do not cover the question
+- Claude answers only from the approved sources provided, cites the source, and recommends escalation when sources do not cover the question — this grounding acts as a second gate for out-of-scope questions that pass retrieval
 - All adoption events persist in SQLite across sessions, so telemetry reflects real cumulative usage
 
 ## Core Workflows
@@ -122,7 +123,18 @@ The prototype tracks usage, feedback, unresolved questions, and escalation signa
 
 ## Evaluation Framework
 
-Future iterations will evaluate answer relevance, source accuracy, escalation quality, user trust, and workflow completion.
+Retrieval and answer quality are measured by a golden-set evaluation suite (`evals/`) — 40 test cases spanning verbatim questions, paraphrases, keyword-mismatch synonyms, and out-of-scope questions that should be refused. The suite compares the previous TF-IDF retriever against the current semantic retriever side by side:
+
+| Metric | TF-IDF (v2) | Semantic (v3) |
+|---|---|---|
+| Hit@1 (32 answerable) | 84% | **100%** |
+| Hit@1, keyword-mismatch cases | 60% | **100%** |
+| False refusals | 19% | **0%** |
+| Correct refusal (8 off-KB) | 50% | 50% |
+| Answer groundedness (Claude-as-judge) | — | **100%** |
+| Answers citing a source | — | **100%** |
+
+Out-of-scope questions that pass the retrieval gate are caught by Claude's grounding prompt, which refuses and recommends escalation. Full results, per-case breakdowns, confidence calibration, and threshold provenance: [`evals/results/eval_report.md`](evals/results/eval_report.md).
 
 ## Metrics
 
@@ -173,18 +185,16 @@ The project focuses on product and adoption metrics, not only model metrics. The
 
 ## Roadmap
 
-The roadmap includes stronger retrieval, role-based access, evaluation tests, improved telemetry, workflow orchestration, and production-readiness controls.
+The roadmap includes role-based access, improved telemetry, workflow orchestration, and production-readiness controls. Semantic retrieval and evaluation tests shipped in v3 — see `ROADMAP.md`.
 
 ## Production Considerations
 
 Future production-oriented iterations would include:
 
 - Role-based access controls
-- Vector-based retrieval
 - Audit logging
 - Prompt injection mitigation
 - Security and privacy controls
-- Evaluation pipelines
 - Workflow orchestration
 - Cost and latency monitoring
 - Human approval checkpoints
@@ -193,7 +203,7 @@ These considerations are critical for moving AI systems from experimentation int
 
 ## What I Would Build Next
 
-Next iterations would include vector-based retrieval, source attribution, role-based permissions, richer operational dashboards, evaluation pipelines, and more advanced workflow orchestration.
+Next iterations would include role-based permissions, richer operational dashboards, a content-owner review queue for escalated questions, and more advanced workflow orchestration.
 
 ## How to Run the Prototype
 
@@ -212,6 +222,16 @@ cp .env.example .env
 ```
 
 Without a key, the prototype runs in retrieval-only fallback mode.
+
+On first run, the retrieval model (`minishlab/potion-base-8M`, ~30MB) downloads once and is cached locally.
+
+To run the evaluation suite:
+
+```bash
+python evals/run_eval.py --retriever both --out evals/results/eval_report.md
+```
+
+Add `--judge` to score answer groundedness with Claude (requires an API key).
 
 ## Artifacts
 

@@ -1,5 +1,21 @@
 # Changelog
 
+## v3.0.0 - Semantic Retrieval + Evaluation Pipeline
+
+### Added
+- Semantic retrieval using local model2vec embeddings (`prototype/retrieval_semantic.py`) — matches meaning rather than keywords; "Can I WFH?" now retrieves the remote work policy (TF-IDF scored it 0.0)
+- Acronym normalization for workplace shorthand (WFH, PTO, OOO, NDA, SSO, MFA, 2FA) applied before embedding
+- Golden-set evaluation harness (`evals/run_eval.py`, 40 cases) scoring hit@1/hit@3, MRR, refusal correctness, and confidence calibration for both retrievers, with a threshold-tuning sweep
+- Claude-as-judge answer scoring for groundedness and citations (`evals/judge.py`), auto-skipped without an API key
+- Committed evaluation report (`evals/results/eval_report.md`): hit@1 84% → 100%, keyword-mismatch hit@1 60% → 100%, false refusals 19% → 0%
+
+### Changed
+- App retrieval engine switched from TF-IDF to semantic embeddings via a retriever facade (`prototype/retrieval.py`); TF-IDF retained for eval comparison (`prototype/retrieval_tfidf.py`)
+- Confidence thresholds tuned on the golden set with a recall-first policy — Claude's grounding prompt serves as the second gate for out-of-scope questions that pass retrieval
+- KB loading and corpus construction extracted to `prototype/kb.py`, shared by both retrievers
+
+---
+
 ## v2.0.0 - Real Retrieval + LLM Pipeline
 
 ### Added

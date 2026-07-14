@@ -33,6 +33,7 @@ if llm.is_available():
     st.sidebar.success("AI-generated answers (Claude)")
 else:
     st.sidebar.info("Retrieval-only fallback mode")
+st.sidebar.caption("Retrieval: semantic embeddings (model2vec)")
 
 if not llm.is_available():
     st.info(
