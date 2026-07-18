@@ -52,6 +52,8 @@ Make the product real: trusted answers, honest metrics.
 
 Deeper analytics on the existing telemetry: usage trends over time, repeat-usage rate, weekly active users, time-saved rollups, and LLM-vs-fallback answer breakdowns.
 
+Also: Helpful / Not Helpful feedback buttons on answers, feeding the helpful-response-rate metric.
+
 ### 2. Governance Controls
 
 - Role-based access controls

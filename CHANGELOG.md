@@ -56,20 +56,4 @@
 
 ## Planned
 
-### v1.1.0 - Trust and Feedback Improvements
-- Add user feedback buttons for Helpful / Not Helpful
-- Display source references more prominently
-- Add unanswered-question capture
-- Improve answer relevance and confidence indicators
-
-### v1.2.0 - Adoption Metrics Layer
-- Add usage analytics dashboard
-- Track repeated usage patterns
-- Surface top unanswered questions
-- Add team-level adoption metrics
-
-### v2.0.0 - Governance and Scale
-- Add escalation paths for high-risk questions
-- Add content owner review workflow
-- Add role-based governance model
-- Explore Slack or Teams integration
+See [ROADMAP.md](ROADMAP.md) for upcoming work (V4: adoption intelligence + governance controls; V5: admin & scale).
